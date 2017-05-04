@@ -47,5 +47,9 @@ class Board{
 		return isQueenPlaced;
 	}
 
+	void Board::doEightQueens(){
+		placequeens(new Queen(firstRow, firstColumn));
+	}
+
 };
 #endif

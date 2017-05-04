@@ -17,9 +17,29 @@ class Queen{
 		row =1;
 		col = 1;
 	}
-	Queen(int inRow,int inCol){
+	Queen(int inRow, int inCol){
 		row = inRow;
 		col = inCol;
+	}
+
+	void Queen::getCol(){
+		return col;
+	}
+
+	void Queen::getRow(){
+		return row;
+	}
+
+	void Queen::nextRow(){
+		row++;
+	}
+
+	bool Queen::isUnderAttack(){
+
+	}
+
+	static void Queen::setBoard(const Board* bPtr){
+		
 	}
 	
 };
