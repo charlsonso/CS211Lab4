@@ -11,7 +11,7 @@ using namespace std;
 
 /** Supplies the Queen class with a pointer to the board. */
 Board::Board() {
-	
+
 }
 
 /** Clears the board and removes pointer from queens. */
@@ -60,36 +60,39 @@ void Board::clear() {
 
 /** Removes the last queen from the board, but does not deallocate it. */
 void Board::removeQueen() {
-	queens.pop_back();
+	if(queens.size() != 0)
+		queens.pop_back();
 }
 
 /** Sees whether a queen exists in position (inRow, inCol). */
 bool Board::isQueen(int row, int col) const {
 	bool isOnBoard = false;
 	for (int i = 0; i < (int)queens.size(); i++) {
-		if (queens[i]->getRow() == row) {
-			if (queens[i]->getCol() == col) {
+		if (queens[i]->getRow() == row && queens[i]->getCol() == col) {
 				isOnBoard = true;
-			}
 		}
 	}
 	return isOnBoard;
 }
 
 /** Places a queen on the board. */
-void Board::setQueen(const Queen* queenPtr) {	
-	//queens.push_back(queenPtr);
+void Board::setQueen(Queen* queenPtr) {	
+	queens.push_back(queenPtr); 
 }
 
 
 /** Displays board. */
 void Board::display() const {
-	//char chessArray[BOARD_SIZE][BOARD_SIZE];
+	cout << "  "; 
+	for (int rowNum = 0; rowNum < BOARD_SIZE; rowNum++)
+		cout << rowNum << " "; //row numbers
+	cout << endl;
 	for (int row = 0; row < BOARD_SIZE; row++) {
-		for(int col = 0; col < BOARD_SIZE; col++) {
-			cout << " + ";
-		}
-		cout << endl;
+		cout << row << " "; //this is col numbers
+		for (int col = 0; col < BOARD_SIZE; col++) {
+			if (isQueen(row, col)) cout << "Q "; //used isQueen() method to check if the vector contains any Queens on the chessboard.
+			else cout << "+ "; //no Queen located
+		} cout << endl;
 	}
 
 }
@@ -101,5 +104,5 @@ int Board::getNumQueens() {
 
 /** @return A pointer to the queen at the designated index. */
 const Queen* Board::getQueen(int index) const {
-	return queens[index];
+	return queens[index]; //vector contains Queen pointers
 }

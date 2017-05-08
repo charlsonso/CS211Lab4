@@ -36,12 +36,9 @@ int Queen::getRow() const {
 /**Moves queen to next row.**/
 void Queen::nextRow() {
 	const int BOARD_SIZE = 8;
-	if (row < BOARD_SIZE) { //max rows & columns are 8;;;;             [ 0 1 2 3 4 5 6 7 ]
+	if (row < BOARD_SIZE)  //max rows & columns are 8;;;;     [ 0 1 2 3 4 5 6 7 ]
 		++row;	   // eg. (0,0) [ Q 0 0 0 0 0 0 0 ] --> (0,1) [ 0 Q 0 0 0 0 0 0 ]
-	}
-	else {
-		cout << "unsuccessful, Queen is on the last row. BACKTRACK NEEDED.";
-	}
+	else cout << "unsuccessful, Queen is on the last row. BACKTRACK NEEDED.";
 }
 
 /** Sees whether the queen is under attack by another queen.
@@ -64,7 +61,7 @@ bool Queen::isUnderAttack() const {
 }
 
 /** Saves a pointer to the board for all queens. */
-void Queen::setBoard(const Board* bPtr) {
-	boardPtr = bPtr;
+void Queen::setBoard(const Board* bPtr) { 
+	 const Board* boardPtr = bPtr; //Note: const Board* Queen::boardPtr = bPtr is used if not part of queen class
 }
 
