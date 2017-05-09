@@ -35,7 +35,7 @@ class Queen{
 	}
 
 	bool Queen::isUnderAttack(){
-
+		
 	}
 
 	static void Queen::setBoard(const Board* bPtr){
