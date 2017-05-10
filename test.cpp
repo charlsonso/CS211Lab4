@@ -12,6 +12,7 @@ using namespace std;
 int main() {
 
 	Board board;
+	board.doEightQueens();
 	board.display();
 
 	system("PAUSE");

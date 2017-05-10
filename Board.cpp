@@ -7,7 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "Board.h"
-using namespace std;
+
 
 /** Supplies the Queen class with a pointer to the board. */
 Board::Board() {
@@ -25,6 +25,7 @@ bool Board::placeQueens(Queen* queenPtr) {
 		delete queenPtr;
 		return true;
 	}
+
 	bool isQueenPlaced = false;
 
 	while (!isQueenPlaced && queenPtr->getRow()<BOARD_SIZE) {
@@ -47,13 +48,13 @@ bool Board::placeQueens(Queen* queenPtr) {
 
 /** Initiates the Eight Queens problem. */
 void Board::doEightQueens() {
-	placeQueens(new Queen);
+	placeQueens(new Queen());
 }
 
 /** Clears board. */
 void Board::clear() {
 	if (!queens.empty()) {
-		for (int i = 0; i < (int)queens.size(); i++) 
+		for (int i = 0; i < (int) queens.size(); i++) 
 			delete queens[i];	
 	}
 }

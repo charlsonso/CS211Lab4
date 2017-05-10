@@ -6,6 +6,7 @@
 */
 #ifndef QUEEN_H
 #define QUEEN_H
+#include "Queen.cpp"
 
 class Board; // Forward declaration of Board class
 //definition: Forward declaration of an identifier (denoting an entity such as a type, a variable, or a function)
