@@ -7,11 +7,12 @@
 #include <iostream>
 #include <vector>
 #include "Board.h"
-using namespace std;
+//#include "Queen.h"
+//using namespace std;
 
 /** Supplies the Queen class with a pointer to the board. */
 Board::Board() {
-
+	Queen::setBoard(this);
 }
 
 /** Clears the board and removes pointer from queens. */
@@ -25,6 +26,7 @@ bool Board::placeQueens(Queen* queenPtr) {
 		delete queenPtr;
 		return true;
 	}
+
 	bool isQueenPlaced = false;
 
 	while (!isQueenPlaced && queenPtr->getRow()<BOARD_SIZE) {
@@ -47,20 +49,20 @@ bool Board::placeQueens(Queen* queenPtr) {
 
 /** Initiates the Eight Queens problem. */
 void Board::doEightQueens() {
-	placeQueens(new Queen);
+	placeQueens(new Queen(0,0));
 }
 
 /** Clears board. */
 void Board::clear() {
 	if (!queens.empty()) {
-		for (int i = 0; i < (int)queens.size(); i++) 
-			delete queens[i];	
+		for (int i = 0; i < (int)queens.size(); i++)
+			delete queens[i];
 	}
 }
 
 /** Removes the last queen from the board, but does not deallocate it. */
 void Board::removeQueen() {
-	if(queens.size() != 0)
+	if (queens.size() != 0)
 		queens.pop_back();
 }
 
@@ -69,21 +71,20 @@ bool Board::isQueen(int row, int col) const {
 	bool isOnBoard = false;
 	for (int i = 0; i < (int)queens.size(); i++) {
 		if (queens[i]->getRow() == row && queens[i]->getCol() == col) {
-				isOnBoard = true;
+			isOnBoard = true;
 		}
 	}
 	return isOnBoard;
 }
-
 /** Places a queen on the board. */
-void Board::setQueen(Queen* queenPtr) {	
-	queens.push_back(queenPtr); 
+void Board::setQueen(Queen* queenPtr) {
+	queens.push_back(queenPtr);
 }
 
 
 /** Displays board. */
 void Board::display() const {
-	cout << "  "; 
+	cout << "  ";
 	for (int rowNum = 0; rowNum < BOARD_SIZE; rowNum++)
 		cout << rowNum << " "; //row numbers
 	cout << endl;
@@ -98,7 +99,7 @@ void Board::display() const {
 }
 
 /** @return The number of queens on the board. */
-int Board::getNumQueens() {
+int Board::getNumQueens() const{
 	return queens.size();
 }
 

@@ -7,16 +7,19 @@
 #ifndef _BOARD
 #define _BOARD
 #include "Queen.h"
+//#include "Board.cpp"
 #include <vector>
 #include <cassert>
 #include <iostream>
 using namespace std;
 
 static const int BOARD_SIZE = 8;
+
 class Board {
+
 private:
 	vector<Queen*> queens; // Array of pointers to queens on the board	
-	bool isQueen(int inRow, int inCol) const ; /** Sees whether a queen exists in position (inRow, inCol). */
+	bool isQueen(int inRow, int inCol) const; /** Sees whether a queen exists in position (inRow, inCol). */
 	bool placeQueens(Queen* queenPtr);
 	void removeQueen();
 	void setQueen(Queen* queenPtr); //originally void setQueen(const Queen* queenPtr)
@@ -27,7 +30,7 @@ public:
 	void clear();
 	void display() const;
 	void doEightQueens();
-	int getNumQueens();
+	int getNumQueens() const;
 	const Queen* getQueen(int index) const;
 };
 #endif
