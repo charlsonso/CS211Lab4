@@ -14,8 +14,8 @@ using namespace std;
 int main() {
 	/**display all possible solutions**/
 	Board board;
-	for (int col = 0; col < 8; col++) {
-		Queen queen(col, 0);
+	for (int row = 0; row < 8; row++) {
+		Queen queen(row, 0);
 		queen.setBoard(&board);
 		board.doEightQueens(queen);
 		board.display();
