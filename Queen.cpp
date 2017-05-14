@@ -11,7 +11,7 @@ using namespace std;
 
 const Board* Queen::boardPtr;
 
-Queen::Queen() : row(0), col(0){
+Queen::Queen() : row(0), col(0) {
 	//default initalizer to start queen at top left
 }
 
@@ -35,54 +35,24 @@ int Queen::getRow() const {
 }
 /**Moves queen to next row.**/
 void Queen::nextRow() {
-	const int BOARD_SIZE = 8;
-	if (row < BOARD_SIZE)  //max rows & columns are 8;;;;     [ 0 1 2 3 4 5 6 7 ]
-		++row;	   // eg. (0,0) [ Q 0 0 0 0 0 0 0 ] --> (0,1) [ 0 Q 0 0 0 0 0 0 ]
-	else cout << "unsuccessful, Queen is on the last row. BACKTRACK NEEDED.";
+	++row;	  
 }
 
 /** Sees whether the queen is under attack by another queen.
 @return True if another queen is in the same row or the same
 diagonal; otherwise, returns false. */
 bool Queen::isUnderAttack() const {
-
-	//access pointer, check if it contains queens in the same row, column, or diagonal
-	//use get numQueens and getQueen to find the queens
-	//check current queen against them and see if theres issue
-	//if issue return false else true
-
-	for (int i = 0; i<boardPtr->getNumQueens(); i++){
-		//find queens already on the board;
+	for (int i = 0; i < boardPtr->getNumQueens(); i++) {
 		const Queen* q = boardPtr->getQueen(i);
-		//save current col and row
-		double c = (double)q->getCol();
-		double r = (double)q->getRow();
-		//find slope between added queen and queen on board
-		double slope = (c - col) / (r - row);
-
-
-		if (c == col || r == row || slope == 1 || slope == -1)
-			return false;
-
+		if (q->getCol() == col || q->getRow() == row || q->getRow()-q->getCol() == row-col || q->getRow()+q->getCol() == row+col)
+			return true;
 	}
-	//if no duplicates 
-	return true;
-	/*//we know a queen is under attack when it is in the same row or column..as well as diagonals.
-	cout << "Current row: " << getRow() << endl;
-	cout << "Current col: " << getCol() << endl;
-
-	//if current queen's row or col is equal to one of the
-	//row or cols of the vector queen, queen is under attack.
-	//check row - col for left diagonal (downward diagonal?)
-	//check row + col for right diagonal (upward diagonal?)
-	if (getCol() == queen.getCol() || getRow() == queen.getRow() || (getRow() - getCol()) == (queen.getRow() - queen.getCol())
-	|| (getRow() + getCol()) == (queen.getRow + queen.getCol()))
-	return true;
-	else */
-	//	return false; //FALSE when placed queen is NOT under attack!
+	return false;
 }
 
 /** Saves a pointer to the board for all queens. */
 void Queen::setBoard(const Board* bPtr) {
-	/*const Board*/ boardPtr = bPtr; //Note: const Board* Queen::boardPtr = bPtr is used if not part of queen class
+	 boardPtr = bPtr; //Note: const Board* Queen::boardPtr = bPtr is used if not part of queen class
 }
+
+

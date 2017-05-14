@@ -7,8 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "Board.h"
-//#include "Queen.h"
-//using namespace std;
+using namespace std;
 
 /** Supplies the Queen class with a pointer to the board. */
 Board::Board() {
@@ -30,6 +29,7 @@ bool Board::placeQueens(Queen* queenPtr) {
 	bool isQueenPlaced = false;
 
 	while (!isQueenPlaced && queenPtr->getRow()<BOARD_SIZE) {
+
 		if (queenPtr->isUnderAttack()) {
 			queenPtr->nextRow();
 		}
@@ -48,16 +48,16 @@ bool Board::placeQueens(Queen* queenPtr) {
 }
 
 /** Initiates the Eight Queens problem. */
-void Board::doEightQueens() {
-	placeQueens(new Queen(0,0));
+void Board::doEightQueens(Queen q) {
+	placeQueens(new Queen(q.getRow(),q.getCol()));
 }
 
 /** Clears board. */
 void Board::clear() {
-	if (!queens.empty()) {
-		for (int i = 0; i < (int)queens.size(); i++)
-			delete queens[i];
+	for (int i = getNumQueens(); i > getNumQueens() ;++i) {
+		delete (queens[i]);
 	}
+	queens.clear();
 }
 
 /** Removes the last queen from the board, but does not deallocate it. */
@@ -91,7 +91,9 @@ void Board::display() const {
 	for (int row = 0; row < BOARD_SIZE; row++) {
 		cout << row << " "; //this is col numbers
 		for (int col = 0; col < BOARD_SIZE; col++) {
-			if (isQueen(row, col)) cout << "Q "; //used isQueen() method to check if the vector contains any Queens on the chessboard.
+			if (isQueen(row, col)) {
+				cout << "Q "; //used isQueen() method to check if the vector contains any Queens on the chessboard.
+			}
 			else cout << "+ "; //no Queen located
 		} cout << endl;
 	}
@@ -99,7 +101,7 @@ void Board::display() const {
 }
 
 /** @return The number of queens on the board. */
-int Board::getNumQueens() const{
+int Board::getNumQueens() const {
 	return queens.size();
 }
 

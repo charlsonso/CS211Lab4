@@ -9,11 +9,19 @@
 #include "Queen.h"
 #include "Board.h"
 using namespace std;
+#include <iostream>
+
 int main() {
-
+	/**display all possible solutions**/
 	Board board;
-	board.display();
-
+	for (int col = 0; col < 8; col++) {
+		Queen queen(col, 0);
+		queen.setBoard(&board);
+		board.doEightQueens(queen);
+		board.display();
+		board.clear();
+		cout << endl;
+	}
 	system("PAUSE");
 	return 0;
 }
